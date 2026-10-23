@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#194d43" />
+    <title>Studywell — Study session planner</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="./"
+        ><span class="logo">s.</span> studywell<span class="brand-note"
+          >A little structure. More headspace.</span
+        ></a
+      ><span class="local-badge">● Saved on this device</span>
+    </header>
+    <main>
+      <section class="intro">
+        <div>
+          <p class="eyebrow">YOUR SPACE TO MAKE PROGRESS</p>
+          <h1>Make room for<br /><em>focused study.</em></h1>
+          <p>Turn your to-dos into time well spent. One session at a time.</p>
+        </div>
+        <div class="intro-note">
+          <span>THE STUDYWELL APPROACH</span>
+          <p>
+            Plan a little.<br />Focus on one thing.<br />See how far you’ve
+            come.
+          </p>
+          <div class="note-line"></div>
+        </div>
+      </section>
+      <div id="storage-error" class="alert" role="alert" hidden></div>
+      <div id="notice" class="sr-only" role="status" aria-live="polite"></div>
+      <section class="demo-bar">
+        <div>
+          <strong id="data-label">Your personal planner</strong
+          ><span id="data-note">Everything stays in this browser.</span>
+        </div>
+        <div>
+          <button id="demo" class="text-button">Load fictional demo</button
+          ><button id="clear" class="text-button danger">Clear planner</button>
+        </div>
+      </section>
+      <section class="stats" aria-label="Progress overview">
+        <article>
+          <span>Tasks complete</span><strong id="task-stat">0 / 0</strong
+          ><progress
+            id="task-progress"
+            value="0"
+            max="1"
+            aria-label="Tasks completed"
+          ></progress>
+        </article>
+        <article>
+          <span>Sessions complete</span><strong id="session-stat">0 / 0</strong
+          ><progress
+            id="session-progress"
+            value="0"
+            max="1"
+            aria-label="Sessions completed"
+          ></progress>
+        </article>
+        <article>
+          <span>Focused time logged</span><strong id="time-stat">0 h</strong
+          ><small>From your completed sessions</small>
+        </article>
+        <article class="accent-stat">
+          <span>Still to study</span><strong id="remaining-stat">0 h</strong
+          ><small>Estimated effort on open tasks</small>
+        </article>
+      </section>
+      <div class="workspace">
+        <section class="tasks-panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">01 / THE BIG PICTURE</p>
+              <h2>Your study tasks</h2>
+            </div>
+            <button id="add-task" class="button small">+ Add task</button>
+          </div>
+          <div class="filter-row">
+            <label for="task-filter">Show</label
+            ><select id="task-filter">
+              <option value="all">All tasks</option>
+              <option value="open">Open tasks</option>
+              <option value="done">Completed tasks</option>
+            </select>
+          </div>
+          <div id="tasks"></div>
+        </section>
+        <section class="schedule-panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">02 / MAKE THE TIME</p>
+              <h2>Your week, with intention</h2>
+            </div>
+            <button id="add-session" class="button small">
+              + Plan session
+            </button>
+          </div>
+          <div class="week-toolbar">
+            <div>
+              <button
+                id="prev-week"
+                class="icon-button"
+                aria-label="Previous week"
+              >
+                ←</button
+              ><button
+                id="next-week"
+                class="icon-button"
+                aria-label="Next week"
+              >
+                →</button
+              ><strong id="week-label"></strong>
+            </div>
+            <button id="this-week" class="text-button">This week</button>
+          </div>
+          <p class="calendar-hint">
+            Local time · Completed sessions stay visible · Overlaps are flagged
+          </p>
+          <div id="week" class="week-grid"></div>
+          <div id="week-summary" class="week-summary"></div>
+        </section>
+      </div>
+      <footer>
+        <span>Small steps add up.</span
+        ><span>Private by design. No account. No cloud sync.</span>
+      </footer>
+    </main>
+    <dialog id="task-dialog">
+      <form id="task-form">
+        <div class="dialog-heading">
+          <h2 id="task-dialog-title">Add study task</h2>
+          <button
+            type="button"
+            class="icon-button close"
+            aria-label="Close task form"
+          >
+            ×
+          </button>
+        </div>
+        <label
+          >Task title<input
+            name="title"
+            maxlength="100"
+            required
+            placeholder="e.g. Revise neural networks" /></label
+        ><label
+          >Course<input
+            name="course"
+            maxlength="60"
+            required
+            placeholder="e.g. DAVE3625"
+        /></label>
+        <div class="form-row">
+          <label>Deadline<input name="deadline" type="date" required /></label
+          ><label
+            >Estimated effort (hours)<input
+              name="effort"
+              type="number"
+              min="0.25"
+              max="1000"
+              step="0.25"
+              required
+              placeholder="3"
+          /></label>
+        </div>
+        <p class="form-help">
+          Past deadlines are allowed and marked overdue. Effort is your total
+          estimate.
+        </p>
+        <div class="form-actions">
+          <button type="button" class="text-button close">Cancel</button
+          ><button class="button" type="submit">Save task</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="session-dialog">
+      <form id="session-form">
+        <div class="dialog-heading">
+          <h2 id="session-dialog-title">Plan a study session</h2>
+          <button
+            type="button"
+            class="icon-button close"
+            aria-label="Close session form"
+          >
+            ×
+          </button>
+        </div>
+        <label>Study task<select name="taskId" required></select></label
+        ><label>Date<input name="date" type="date" required /></label>
+        <div class="form-row">
+          <label>Start time<input name="start" type="time" required /></label
+          ><label>End time<input name="end" type="time" required /></label>
+        </div>
+        <p class="form-help">
+          Sessions start and finish on the same day. Past sessions can be logged
+          too.
+        </p>
+        <div
+          id="session-warning"
+          class="alert warning"
+          role="status"
+          hidden
+        ></div>
+        <div class="form-actions">
+          <button type="button" class="text-button close">Cancel</button
+          ><button class="button" type="submit">Save session</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="confirm-dialog">
+      <form method="dialog">
+        <h2 id="confirm-title">Clear planner?</h2>
+        <p id="confirm-message"></p>
+        <div class="form-actions">
+          <button value="cancel" class="text-button">Cancel</button
+          ><button value="confirm" class="button destructive">Confirm</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
