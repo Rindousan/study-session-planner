@@ -49,7 +49,6 @@ storage.js
 
 `server.js` is a local preview utility only; no backend is deployed. Use the repository root as the static source directory, with `index.html` as the entry point and no build command. JavaScript files must be served with a JavaScript MIME type over HTTPS or localhost. The app has no remote assets, fonts, analytics, runtime libraries, or external API calls.
 
-The user will publish on VibeOff.ai and submit through Canvas. See [SUBMISSION.md](SUBMISSION.md) for a reviewable application description, demo script, and remaining steps. No VibeOff publication or Canvas submission was performed by the agent.
 
 ## Data and privacy
 
