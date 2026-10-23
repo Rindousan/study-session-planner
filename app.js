@@ -45,6 +45,9 @@ if (loaded.error)
   );
 let storageBlocked = !$("#storage-error").hidden;
 function save(message) {
+  const focused = document.activeElement;
+  const focusAction = focused?.dataset.action;
+  const focusId = focused?.dataset.id;
   if (!storageBlocked) {
     if (storePlanner(browserStorage, state)) {
       $("#storage-error").hidden = true;
@@ -56,6 +59,13 @@ function save(message) {
     }
   }
   render();
+  // Completion redraws cards; keep the keyboard user's place in the planner.
+  if (focusAction) {
+    const replacement = [...document.querySelectorAll('[data-action]')].find(
+      (control) => control.dataset.action === focusAction && control.dataset.id === focusId,
+    );
+    (replacement || $("#add-task")).focus();
+  }
   $("#notice").textContent = message;
 }
 const fmt = (d) =>
@@ -255,6 +265,7 @@ $("#task-form").addEventListener("submit", (e) => {
   if (editingTask)
     state.tasks = state.tasks.map((old) => (old.id === editingTask ? t : old));
   else state.tasks.push(t);
+  $("#task-filter").value = "all";
   $("#task-dialog").close();
   save("Task saved.");
 });
@@ -347,6 +358,7 @@ $("#demo").onclick = async () => {
   )
     return;
   state = demoState();
+  $("#task-filter").value = "all";
   storageBlocked = false;
   week = monday(new Date());
   save("Fictional demo loaded.");
@@ -360,6 +372,7 @@ $("#clear").onclick = async () => {
   )
     return;
   state = emptyState();
+  $("#task-filter").value = "all";
   storageBlocked = false;
   save("Planner cleared. You can start fresh.");
 };

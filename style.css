@@ -685,18 +685,22 @@ form select {
     min-height: 0;
   }
   .day {
-    display: grid;
-    grid-template-columns: 51px 1fr;
-    gap: 10px;
+    display: block;
+    position: relative;
+    min-height: 70px;
     border-right: 0;
     border-bottom: 1px solid var(--line);
-    padding: 10px;
+    padding: 10px 10px 10px 72px;
   }
   .day:last-child {
     border-bottom: 0;
   }
   .day-head {
-    grid-row: 1 / span 20;
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    width: 51px;
     border-bottom: 0;
     margin: 0;
     padding: 0;
