@@ -67,4 +67,4 @@ Screenshots of the final fictional demo: [desktop](docs/desktop.png), [mobile](d
 
 ## Publication privacy check
 
-Before the source push, project files and Git history were reviewed and searched for credential patterns, personal paths, and personal-data strings. The source contains fictional demo tasks, public project links, and local development URLs. No passwords, API keys, confidential files, or personal study data were found. The initial commit uses a GitHub no-reply email; new implementation commits use a generic project identity. No browser storage was exported into the source. No LifeOS files were accessed or changed.
+Before the source push, project files and Git history were reviewed and searched for credential patterns, personal paths, and personal-data strings. The source contains fictional demo tasks, public project links, and local development URLs. No passwords, API keys, confidential files, or personal study data were found. The initial commit uses a GitHub no-reply email; new implementation commits use a generic project identity. No browser storage was exported into the source. 
