@@ -1,6 +1,6 @@
 # Studywell — Study Session Planner
 
-A small, responsive study planner built for DAVE3625 Oblig 3. It helps a student turn tasks into scheduled study time and see their progress. The interface and all example data are in English.
+A small, responsive study planner. It helps a student turn tasks into scheduled study time and see their progress. The interface and all example data are in English.
 
 **Source:** https://github.com/Rindousan/study-session-planner
 
